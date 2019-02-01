@@ -1,0 +1,46 @@
+/*Main*/
+.mainBlock {
+  height: auto;
+  width: 400px;
+  margin: 0 auto;
+  /*background-color: #328bff;*/
+  font-size: 1em;
+  margin-top: 5%;
+}
+
+
+    .dateChoose {
+      float: left;
+      width:  400px;
+      height: 290px;
+      /*background-color: #daffe1;*/
+      display: flex;
+      align-items:center;
+      flex-direction: column;
+    }
+
+
+    .textWrite {
+        float: left;
+        width: 400px;
+        height: 200px;
+        /*background-color: #f6ff62;*/
+        display: flex;
+        align-items:center;
+        flex-direction: column;
+      }
+
+    .buttonMenu {
+        float: left;
+        width:  400px;
+        height: 100px;
+        /*background-color: #ff6135;*/
+        display: flex;
+        align-items:center;
+
+      }
+          .buttonMenu button {
+           margin-left: 11%;
+          }
+
+

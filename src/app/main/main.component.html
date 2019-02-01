@@ -1,0 +1,98 @@
+<!--<mat-calendar></mat-calendar>-->
+<div class="backMainBlock">
+
+   <div class="row">
+    <div class="leftCalendar">
+      <div class="userName">
+        <img class="avatar" src="assets/shiba1.jpg">
+        <span>Shiba Inu</span>
+      </div>
+        <div style="width: 200px; height: 200px;">
+
+          <mat-calendar (_userSelection)="acceptCalendar()" [selected]="selectDate" (selectedChange)="selectDate = $event">   </mat-calendar>
+
+        </div>
+
+      <div style="padding-top: 100px;  font-size: 0.6em;">
+          <mat-button-toggle-group [(ngModel)] = "defaultCalendar">
+            <mat-button-toggle value="day" (click)="acceptCalendar()" >ДЕНЬ</mat-button-toggle>
+            <mat-button-toggle value="week" (click)="acceptCalendar()">ТИЖДЕНЬ</mat-button-toggle>
+            <mat-button-toggle value="month" (click)="acceptCalendar()">МІСЯЦЬ</mat-button-toggle>
+          </mat-button-toggle-group>
+      </div>
+
+    </div>
+
+    <div class="rightAgenda">
+          <div class="filterDate row">
+            <mat-form-field appearance="outline" >
+              <input matInput  [(ngModel)] ="first" [matDatepicker]="picker1"  placeholder="Початкова дата">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" >
+              <input matInput [(ngModel)] ="end" [matDatepicker]="picker2" placeholder="Кінцева дата">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker  #picker2></mat-datepicker>
+
+            </mat-form-field>
+            <!--style="margin-left: 10px; margin-bottom: 16px;  height: 40px; width: 100px; font-size: 1em"-->
+            <button mat-raised-button color="primary" (click)="acceptPikers()" >Прийняти <mat-icon>date_range</mat-icon></button>
+            <button mat-raised-button color="accent" (click)="goToPage()" >Створити <mat-icon>queue</mat-icon></button>
+          </div>
+
+          <div class="foundEvent">
+            <mat-form-field appearance="outline" >
+              <mat-label>Пошук</mat-label>
+              <input matInput  (keyup)="applyFilter($event.target.value)" placeholder="Введіть назву події">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </div>
+
+      <!--<div>-->
+        <!--<mat-progress-bar *ngIf="success" mode="indeterminate"></mat-progress-bar>-->
+      <!--</div>-->
+
+          <mat-paginator   [pageSize]="5" [pageSizeOptions]="[5, 10, 50, 100]"></mat-paginator>
+          <mat-table   [dataSource]="dataAgenda"  class="example-container mat-elevation-z2" matSort>
+
+            <ng-container matColumnDef="date">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>ДАТА</mat-header-cell>
+              <mat-cell *matCellDef="let items">{{items.date | date: 'd-MM-yyyy HH:mm:ss': 'Z'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>НАЗВА ПОДІЇ</mat-header-cell>
+              <mat-cell *matCellDef="let items">{{items.name}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>ОПИС</mat-header-cell>
+              <mat-cell *matCellDef="let items">  <textarea matInput readonly>{{items.description}}</textarea> </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="manage">
+              <mat-header-cell *matHeaderCellDef>КЕРУВАННЯ</mat-header-cell>
+              <mat-cell *matCellDef="let items">
+
+                  <button mat-icon-button color="warn" (click)="deleteMsg(items)">
+                    <mat-icon aria-label="Example icon-button with a heart icon">delete_forever</mat-icon>
+                  </button>
+                  <button mat-icon-button color="primary" (click)="changeMsg(items)"  style="margin-left: 10%">
+                    <mat-icon aria-label="Example icon-button with a heart icon">create</mat-icon>
+                  </button>
+
+                <!--<button (click)="deleteMsg(items)">DEL</button>-->
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="DispleyColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: DispleyColumns;" appHover></mat-row>
+          </mat-table>
+     </div>
+   </div>
+</div>
+
+<!--<div *ngFor="let item of datatest | search: 'description' : serchStr ">{{item.description}}  <button (click)="delete(item)" >DEL</button></div>-->
+

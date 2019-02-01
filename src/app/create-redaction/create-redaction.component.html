@@ -1,0 +1,46 @@
+<div class="mainBlock">
+    <div class="dateChoose">
+      <mat-form-field appearance="outline"  >
+        <mat-label>Оберіть дату</mat-label>
+        <input matInput required [(ngModel)] = "_date" [matDatepicker]="picker1" >
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Оберіть годону</mat-label>
+      <mat-select  [(ngModel)]="_hour"  placeholder="Select">
+        <mat-option *ngFor="let item of hourM" [value]="item.hour">
+          {{item.hour}}
+        </mat-option>
+      </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Оберіть хвилину</mat-label>
+      <mat-select  [(ngModel)]="_minute"  placeholder="Select">
+        <mat-option *ngFor="let item of minuteM" [value]="item.minute">
+          {{item.minute}}
+        </mat-option>
+      </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="textWrite">
+      <mat-form-field appearance="outline" >
+        <mat-label>Назва</mat-label>
+        <input matInput #name [(ngModel)] = "_name" required placeholder="Введіть текст">
+     </mat-form-field>
+
+     <mat-form-field appearance="outline" style=" width: 300px; ">
+        <mat-label>Примітка</mat-label>
+        <textarea matInput #description style=" height: 50px; " [(ngModel)] = "_description" required placeholder="Введіть текст"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="buttonMenu">
+        <button (click)="goToPage()" mat-raised-button>ДОДОМУ <mat-icon>home</mat-icon></button>
+        <button type="submit" (click)="createEvent()" mat-raised-button color="primary">ЗАСТОСУВАТИ <mat-icon>create</mat-icon></button>
+    </div>
+
+</div>
